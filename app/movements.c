@@ -12,10 +12,6 @@ void moveUp(int* x, int* y, int* health, int* score, char** map, char icon)
 		*y = *y - 1;
 		map[*y][*x] = icon;
 	}
-	else
-	{
-		*health = *health - 10;
-	}
 }
 
 void moveDown(int* x, int* y, int* health, int* score, char** map, char icon)
@@ -29,10 +25,6 @@ void moveDown(int* x, int* y, int* health, int* score, char** map, char icon)
 		map[*y][*x] = ' ';
 		*y += 1;
 		map[*y][*x] = icon;
-	}
-	else
-	{
-		*health = *health - 10;
 	}
 }
 
@@ -48,10 +40,6 @@ void moveRight(int* x, int* y, int* health, int* score, char** map, char icon)
 		*x = *x + 1;
 		map[*y][*x] = icon;
 	}
-	else
-	{
-		*health = *health - 10;
-	}
 }
 
 void moveLeft(int* x, int* y, int* health, int* score, char** map, char icon)
@@ -66,8 +54,21 @@ void moveLeft(int* x, int* y, int* health, int* score, char** map, char icon)
 		*x = *x - 1;
 		map[*y][*x] = icon;
 	}
-	else
+}
+
+void doNothing(void) {};
+
+void defaultSword(int* x, int* y, int* health, int* score, char** map)
+{
+	for (int i = *y - 1; i <= *y + 1; i++)
 	{
-		*health = *health - 10;
+		for (int j = *x - 1; j <= *x + 1; j++)
+		{
+			if (map[i][j] == '#')
+			{
+				map[i][j] = ' ';
+				*score += 20;
+			}
+		}
 	}
 }
